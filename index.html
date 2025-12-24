@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Abécédaire – Wang-Fô</title>
+
+<style>
+body {
+    font-family: "Times New Roman", serif;
+    background-color: #f4f1e8;
+    margin: 0;
+    padding: 30px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.letters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.letters button {
+    background: #fbf7ec;
+    border: 2px solid #8b6b3e;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "Garamond", serif;
+}
+
+.letters button:hover {
+    background-color: #e6dcc6;
+}
+
+.card {
+    background: #fbf7ec;
+    border: 3px solid #8b6b3e;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.word-title {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #5a3e1b;
+}
+
+.word-title::first-letter {
+    font-size: 60px;
+    color: #7a1f1f;
+    font-weight: bold;
+    float: left;
+    margin-right: 8px;
+    line-height: 1;
+}
+
+.text {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.image {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.image img {
+    max-width: 100%;
+    border: 2px solid #8b6b3e;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="letters" id="letters"></div>
+
+<div class="card">
+    <div class="word-title"></div>
+    <div class="text"></div>
+    <div class="image"><img></div>
+</div>
+
+</div>
+
+<script>
+const words = {
+
+'A': {
+word: 'Apparence',
+img: 'images/apparence.jpg',
+text: `J’ai choisi le mot apparence car la nouvelle montre que ce que l’on voit n’est pas toujours vrai.
+Les tableaux de Wang-Fô donnent une image idéale du monde.
+L’empereur croit que la réalité doit ressembler aux peintures.
+Ce mot montre que l’art peut tromper le regard.
+Il aide à comprendre le conflit entre illusion et vérité.
+L’apparence est donc essentielle dans l’œuvre.`
+},
+
+'B': {
+word: 'Beauté',
+img: 'images/beaute.jpg',
+text: `J’ai choisi le mot beauté car il est au cœur de l’art de Wang-Fô.
+Ses peintures cherchent toujours la perfection.
+La beauté rend le monde plus agréable à regarder.
+Elle fait oublier la misère et la violence.
+Ce mot montre le pouvoir attirant de l’art.
+Il explique pourquoi les tableaux sont si importants.`
+},
+
+'C': {
+word: 'Création',
+img: 'images/creation.jpg',
+text: `J’ai choisi le mot création car Wang-Fô vit pour peindre.
+Créer permet à l’artiste d’exprimer sa vision du monde.
+La création demande du temps et de la patience.
+Elle montre la liberté de l’artiste.
+Ce mot aide à comprendre le rôle de l’art.
+Sans création, l’histoire n’existerait pas.`
+},
+
+'D': {
+word: 'Disciple',
+img: 'images/disciple.jpg',
+text: `J’ai choisi le mot disciple car Ling apprend auprès de Wang-Fô.
+Il observe son maître pour progresser.
+Le disciple respecte et suit l’artiste.
+Ce mot montre la transmission du savoir.
+Il souligne l’importance de l’apprentissage.
+La relation maître-disciple est essentielle.`
+},
+
+'E': {
+word: 'Évasion',
+img: 'images/evasion.jpg',
+text: `J’ai choisi le mot évasion car l’art permet de fuir la réalité.
+Les peintures offrent un monde plus doux.
+Elles font oublier la souffrance.
+L’évasion est mentale et artistique.
+Ce mot montre le pouvoir de l’imagination.
+Il explique pourquoi l’art est si précieux.`
+},
+
+'I': {
+word: 'Illusion',
+img: 'images/illusion.jpg',
+text: `J’ai choisi le mot illusion car les tableaux donnent une fausse réalité.
+L’empereur croit que le monde peint est vrai.
+L’illusion brouille la frontière entre réel et imaginaire.
+Elle peut être belle mais dangereuse.
+Ce mot aide à comprendre le malentendu.
+Il est central dans la nouvelle.`
+},
+
+'M': {
+word: 'Misère',
+img: 'images/misere.jpg',
+text: `J’ai choisi le mot misère car il représente le monde réel.
+La pauvreté est opposée à la beauté des tableaux.
+La misère rend la vie difficile.
+Elle explique pourquoi l’art devient une échappatoire.
+Ce mot montre la dureté de la réalité.
+Il renforce le contraste avec l’art.`
+},
+
+'P': {
+word: 'Pouvoir',
+img: 'images/pouvoir.jpg',
+text: `J’ai choisi le mot pouvoir car il oppose l’empereur et l’artiste.
+L’empereur a le pouvoir politique.
+Wang-Fô a le pouvoir de l’art.
+Ce mot montre deux formes de domination.
+L’art influence les esprits.
+Le pouvoir est un thème important.`
+},
+
+'R': {
+word: 'Réalité',
+img: 'images/realite.jpg',
+text: `J’ai choisi le mot réalité car elle est souvent dure.
+Elle ne ressemble pas aux tableaux.
+La réalité déçoit l’empereur.
+Elle s’oppose au monde idéalisé de l’art.
+Ce mot aide à comprendre le conflit principal.
+Il est essentiel dans la nouvelle.`
+},
+
+'S': {
+word: 'Sacrifice',
+img: 'images/sacrifice.jpg',
+text: `J’ai choisi le mot sacrifice car Wang-Fô vit pour son art.
+Il accepte de tout perdre pour peindre.
+L’art passe avant le reste.
+Ce mot montre l’engagement de l’artiste.
+Le sacrifice demande du courage.
+Il souligne la force de la passion artistique.`
+},
+
+'T': {
+word: 'Tranquillité',
+img: 'images/tranquillite.jpg',
+text: `J’ai choisi le mot tranquillité car l’art apporte le calme.
+Peindre permet de se concentrer.
+La tranquillité est liée à la contemplation.
+Elle s’oppose à la violence du monde.
+Ce mot montre le rôle apaisant de l’art.
+Il représente un idéal recherché.`
+}
+
+};
+
+const lettersDiv = document.getElementById('letters');
+const titleDiv = document.querySelector('.word-title');
+const textDiv = document.querySelector('.text');
+const imgDiv = document.querySelector('.image img');
+
+for (const letter in words) {
+    const btn = document.createElement('button');
+    btn.textContent = letter;
+    btn.onclick = () => showWord(letter);
+    lettersDiv.appendChild(btn);
+}
+
+function showWord(letter) {
+    const w = words[letter];
+    titleDiv.textContent = w.word;
+    textDiv.innerHTML = w.text.replace(/\n/g, "<br>");
+    imgDiv.src = w.img;
+    imgDiv.alt = w.word;
+}
+
+showWord('A');
+</script>
+
+</body>
+</html>
